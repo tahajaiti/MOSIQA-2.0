@@ -30,7 +30,6 @@ public class TrackCreateRequest {
     @NotNull(message = "Category is required")
     private MusicCategory category;
 
-    @NotNull(message = "Duration is required")
-    @Positive(message = "Duration must be positive")
+    // Duration is optional - will be calculated from audio file if not provided
     private Double duration;
 }

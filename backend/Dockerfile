@@ -27,7 +27,7 @@ WORKDIR /app
 RUN mkdir -p /app/data
 
 # Copy the built jar
-COPY --from=builder /app/build/libs/*.jar app.jar
+COPY --from=builder /app/build/libs/app.jar app.jar
 
 # Expose port
 EXPOSE 8080

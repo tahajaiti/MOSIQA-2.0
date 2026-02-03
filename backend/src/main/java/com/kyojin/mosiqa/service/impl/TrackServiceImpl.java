@@ -61,6 +61,11 @@ public class TrackServiceImpl implements TrackService {
         track.setAudioFileId(savedAudio.getId());
         track.setCoverImageId(coverImageId);
         
+        // Set default duration if not provided
+        if (track.getDuration() == null || track.getDuration() <= 0) {
+            track.setDuration(0.0);
+        }
+        
         Track savedTrack = trackRepository.save(track);
         log.info("Created track: {} - {} with id: {}", savedTrack.getTitle(), savedTrack.getArtist(), savedTrack.getId());
         

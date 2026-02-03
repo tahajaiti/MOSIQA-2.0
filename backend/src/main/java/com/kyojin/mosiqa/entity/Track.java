@@ -42,7 +42,7 @@ public class Track {
     @Column(nullable = false)
     private MusicCategory category;
 
-    @Column(nullable = false)
+    @Column
     private Double duration;
 
     @Column(nullable = false)

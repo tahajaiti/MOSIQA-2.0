@@ -1,5 +1,5 @@
-# Build stage
-FROM node:22-alpine AS builder
+# Development Dockerfile - runs ng serve directly
+FROM node:22-alpine
 
 WORKDIR /app
 
@@ -9,27 +9,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
+# Install Angular CLI globally
+RUN npm install -g @angular/cli
+
 # Copy source code
 COPY . .
 
-# Build for production
-RUN npm run build
+# Expose Angular dev server port
+EXPOSE 4200
 
-# Production stage
-FROM nginx:alpine
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Copy built application
-COPY --from=builder /app/dist/MOSIQA /usr/share/nginx/html
-
-# Expose port
-EXPOSE 80
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:80 || exit 1
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+# Start Angular dev server with host binding for Docker
+CMD ["ng", "serve", "--host", "0.0.0.0"]

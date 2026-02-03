@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { map, catchError, switchMap, tap } from 'rxjs/operators';
@@ -9,11 +9,9 @@ import * as TrackActions from './track.actions';
 
 @Injectable()
 export class TrackEffects {
-    constructor(
-        private actions$: Actions,
-        private trackApiService: TrackApiService,
-        private toastService: ToastService
-    ) { }
+    private actions$ = inject(Actions);
+    private trackApiService = inject(TrackApiService);
+    private toastService = inject(ToastService);
 
     private mapResponseToTrack(response: TrackResponse): Track {
         return {
