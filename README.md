@@ -40,7 +40,7 @@ MOSIQA-2/
 **Backend:**
 ```bash
 cd backend
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew bootRun --args='--spring.profiles.active=dev'
+./gradlew bootRun --args='--spring.profiles.active=dev'
 ```
 
 **Frontend:**
@@ -84,7 +84,7 @@ Access:
 **Backend:**
 ```bash
 cd backend
-JAVA_HOME=/usr/lib/jvm/java-21-openjdk ./gradlew test
+./gradlew test
 ```
 
 **Frontend:**
